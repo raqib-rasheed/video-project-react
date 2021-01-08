@@ -1,25 +1,29 @@
-import logo from './logo.svg';
+import React from 'react'
 import './App.css';
+import video from "./util/forest_fire_mountains_natural_disaster_634.mp4"
+
 
 function App() {
+  const [playing,setPlaying] = React.useState(true)
+  function controlVideo(e){
+    let video = e.target.parentElement.parentNode.firstChild
+    setPlaying(!playing)
+    playing?video.pause():video.play()
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="container">
+      <video name="video" className="video-container"  muted autoPlay loop>
+        <source src={video} />
+      </video>
+      <div className="overlay" /> 
+      <h1>Video Project</h1>
+      <div id="btn-container">
+      <button 
+      onClick={controlVideo}
+      className="btn btn-outline-light">Play | Pause</button>
+      </div>
     </div>
-  );
+  )
 }
 
 export default App;
